@@ -15,17 +15,17 @@ interface TabsProps {
 
 const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, onTabChange }) => {
   return (
-    <div className="flex gap-1 border-b border-gray-200 mb-6">
+    <div className="inline-flex bg-gray-100 rounded-lg p-1 mb-6">
       {tabs.map((tab) => (
         <button
           key={tab.value}
           onClick={() => onTabChange(tab.value)}
           className={`
-            px-6 py-3 text-sm font-medium transition-colors relative
+            px-4 py-2.5 text-sm font-medium transition-all rounded-md
             ${
               activeTab === tab.value
-                ? 'text-blue-600 border-b-2 border-blue-600'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-white text-gray-900 shadow-sm border border-gray-200'
+                : 'text-gray-500 hover:text-gray-700'
             }
           `}
         >

@@ -1,20 +1,26 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 interface NavItem {
   label: string;
   icon: React.ReactNode;
+  path?: string;
   active?: boolean;
   highlighted?: boolean;
   bold?: boolean;
 }
 
 const Sidebar: React.FC = () => {
+  const pathname = usePathname();
+
   // Scrollable navigation items
   const scrollableNavItems: NavItem[] = [
     {
       label: 'Dashboard',
+      path: '/',
       icon: (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M2.5 2.5H8.33V8.33H2.5V2.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -23,10 +29,10 @@ const Sidebar: React.FC = () => {
           <path d="M11.67 11.67H17.5V17.5H11.67V11.67Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
-      active: true,
     },
     {
       label: 'Emissions (Scope 1 & 2)',
+      path: '/emissions-scope-1-2',
       icon: (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M10 2.5C13.33 2.5 16.25 4.17 17.5 6.67M10 2.5C6.67 2.5 3.75 4.17 2.5 6.67M10 17.5C6.67 17.5 3.75 15.83 2.5 13.33M10 17.5C13.33 17.5 16.25 15.83 17.5 13.33M2.5 6.67C2.5 8.33 3.33 9.75 4.58 10.5M15.42 9.5C16.67 8.75 17.5 7.33 17.5 5.67M17.5 13.33C17.5 11.67 16.67 10.25 15.42 9.5M4.58 10.5C3.33 11.25 2.5 12.67 2.5 14.33" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -248,14 +254,16 @@ const Sidebar: React.FC = () => {
     },
   ];
 
-  const renderNavItem = (item: NavItem, index: number) => (
-    <li key={index}>
-      <a
-        href="#"
+  const renderNavItem = (item: NavItem, index: number) => {
+    const isActive = item.path ? pathname === item.path : item.active;
+    const href = item.path || '#';
+    
+    const content = (
+      <div
         className={`
           flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-colors
           ${
-            item.active
+            isActive
               ? 'bg-[#007BFF] text-white'
               : item.highlighted
               ? 'bg-[#2D3748] text-white'
@@ -266,9 +274,19 @@ const Sidebar: React.FC = () => {
       >
         <span className="flex-shrink-0">{item.icon}</span>
         <span className="flex-1">{item.label}</span>
-      </a>
-    </li>
-  );
+      </div>
+    );
+
+    return (
+      <li key={index}>
+        {item.path ? (
+          <Link href={href}>{content}</Link>
+        ) : (
+          <a href={href}>{content}</a>
+        )}
+      </li>
+    );
+  };
 
   return (
     <aside className="fixed left-0 top-0 h-screen w-64 bg-[#1A202C] text-white flex flex-col sidebar-scrollbar">
