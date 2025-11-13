@@ -41,6 +41,7 @@ const Sidebar: React.FC = () => {
     },
     {
       label: 'Supply Chain (Scope 3)',
+      path: '/supply-chain',
       icon: (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M2.5 5.83L10 2.5L17.5 5.83V10C17.5 14.17 13.33 17.5 10 17.5C6.67 17.5 2.5 14.17 2.5 10V5.83Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -50,6 +51,7 @@ const Sidebar: React.FC = () => {
     },
     {
       label: 'Supply Chain Intelligence',
+      path: '/supply-chain-intelligence',
       icon: (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M2.5 15L6.67 10L10 13.33L13.33 8.33L17.5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import Tabs from '../common/Tabs';
 import Scope1EmissionsBySource from './Scope1EmissionsBySource';
 import DetailedScope1Data from './DetailedScope1Data';
+import Scope2MethodCards from './Scope2MethodCards';
+import DetailedScope2Data from './DetailedScope2Data';
 
 const EmissionsScope12Content: React.FC = () => {
   const [activeTab, setActiveTab] = useState('scope1');
@@ -32,9 +34,9 @@ const EmissionsScope12Content: React.FC = () => {
         </div>
       )}
       {activeTab === 'scope2' && (
-        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Scope 2 Emissions</h2>
-          <p className="text-gray-600">Scope 2 content will be displayed here</p>
+        <div className="space-y-6">
+          <Scope2MethodCards />
+          <DetailedScope2Data />
         </div>
       )}
     </div>
