@@ -61,6 +61,7 @@ const Sidebar: React.FC = () => {
     },
     {
       label: 'Targets & Performance',
+      path: '/targets-and-performance',
       icon: (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="10" cy="10" r="7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -71,6 +72,7 @@ const Sidebar: React.FC = () => {
     },
     {
       label: 'ESG Reporting',
+      path: '/esg-reporting',
       icon: (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5.83 2.5H14.17C15.17 2.5 16 3.33 16 4.33V15.67C16 16.67 15.17 17.5 14.17 17.5H5.83C4.83 17.5 4 16.67 4 15.67V4.33C4 3.33 4.83 2.5 5.83 2.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -81,6 +83,7 @@ const Sidebar: React.FC = () => {
     },
     {
       label: 'Sites & Assets',
+      path: '/sites-and-assets',
       icon: (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M3.33 17.5H16.67V8.33H3.33V17.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

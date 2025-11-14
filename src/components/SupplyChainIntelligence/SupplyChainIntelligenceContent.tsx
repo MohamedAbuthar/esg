@@ -9,6 +9,14 @@ import EmissionsIntensity from './EmissionsIntensity';
 import SupplierEmissionsSpendAnalysis from './SupplierEmissionsSpendAnalysis';
 import DataQualityImprovement from './DataQualityImprovement';
 import EngagementCampaigns from './EngagementCampaigns';
+import LaunchNewCampaign from './LaunchNewCampaign';
+import EngagementPerformance from './EngagementPerformance';
+import SupplierRiskMatrix from './SupplierRiskMatrix';
+import RiskScoringBreakdown from './RiskScoringBreakdown';
+import AutomatedDataRequests from './AutomatedDataRequests';
+import CreateDataRequest from './CreateDataRequest';
+import SupplyChainDecarbonizationProgress from './SupplyChainDecarbonizationProgress';
+import DecarbonizationMetricsCards from './DecarbonizationMetricsCards';
 
 const SupplyChainIntelligenceContent: React.FC = () => {
   const [activeTab, setActiveTab] = useState('spend-based');
@@ -68,9 +76,31 @@ const SupplyChainIntelligenceContent: React.FC = () => {
       {activeTab === 'supplier-engagement' && (
         <div className="space-y-6">
           <EngagementCampaigns />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <LaunchNewCampaign />
+            <EngagementPerformance />
+          </div>
         </div>
       )}
-      {activeTab !== 'spend-based' && activeTab !== 'supplier-engagement' && (
+      {activeTab === 'risk-scoring' && (
+        <div className="space-y-6">
+          <SupplierRiskMatrix />
+          <RiskScoringBreakdown />
+        </div>
+      )}
+      {activeTab === 'data-requests' && (
+        <div className="space-y-6">
+          <AutomatedDataRequests />
+          <CreateDataRequest />
+        </div>
+      )}
+      {activeTab === 'decarbonization' && (
+        <div className="space-y-6">
+          <SupplyChainDecarbonizationProgress />
+          <DecarbonizationMetricsCards />
+        </div>
+      )}
+      {activeTab !== 'spend-based' && activeTab !== 'supplier-engagement' && activeTab !== 'risk-scoring' && activeTab !== 'data-requests' && activeTab !== 'decarbonization' && (
         <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
           <p className="text-gray-600">Content for {tabs.find(t => t.value === activeTab)?.label} will be displayed here</p>
         </div>

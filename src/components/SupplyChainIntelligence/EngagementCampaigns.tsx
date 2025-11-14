@@ -11,8 +11,21 @@ import {
 } from '../ui/table';
 import { Button } from '../ui/button';
 
+interface Campaign {
+  campaignId: string;
+  name: string;
+  launched: string;
+  targetSuppliers: number;
+  contacted: number;
+  responded: number;
+  submitted: number;
+  responseRate: number;
+  deadline: string;
+  status: 'Active' | 'Completed';
+}
+
 const EngagementCampaigns: React.FC = () => {
-  const data = [
+  const campaigns: Campaign[] = [
     {
       campaignId: 'CAMP-001',
       name: '2024 Climate Action Campaign',
@@ -51,69 +64,84 @@ const EngagementCampaigns: React.FC = () => {
     },
   ];
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-      {/* Header */}
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Engagement Campaigns</h2>
-        <p className="text-gray-600">Track supplier engagement initiatives and response rates</p>
+        <h2 className="text-lg font-semibold text-gray-900 mb-1">Engagement Campaigns</h2>
+        <p className="text-sm text-gray-600">Track supplier engagement initiatives and response rates.</p>
       </div>
-
-      {/* Table */}
-      <div className="w-full max-w-full overflow-hidden">
-        <div className="overflow-x-auto w-full">
-          <Table className="w-full" style={{ minWidth: '1000px' }}>
+      
+      <div className="overflow-x-auto -mx-6 px-6">
+        <div className="min-w-full inline-block align-middle">
+          <Table className="min-w-[1200px]">
             <TableHeader>
-              <TableRow className="border-b border-gray-200 bg-gray-50">
-                <TableHead className="font-semibold text-gray-900 py-3 px-4 text-left whitespace-nowrap">Campaign ID</TableHead>
-                <TableHead className="font-semibold text-gray-900 py-3 px-4 text-left whitespace-nowrap">Name</TableHead>
-                <TableHead className="font-semibold text-gray-900 py-3 px-4 text-left whitespace-nowrap">Launched</TableHead>
-                <TableHead className="font-semibold text-gray-900 py-3 px-4 text-right whitespace-nowrap">Target Suppliers</TableHead>
-                <TableHead className="font-semibold text-gray-900 py-3 px-4 text-right whitespace-nowrap">Contacted</TableHead>
-                <TableHead className="font-semibold text-gray-900 py-3 px-4 text-right whitespace-nowrap">Responded</TableHead>
-                <TableHead className="font-semibold text-gray-900 py-3 px-4 text-right whitespace-nowrap">Submitted</TableHead>
-                <TableHead className="font-semibold text-gray-900 py-3 px-4 text-left whitespace-nowrap">Response Rate</TableHead>
-                <TableHead className="font-semibold text-gray-900 py-3 px-4 text-left whitespace-nowrap">Deadline</TableHead>
-                <TableHead className="font-semibold text-gray-900 py-3 px-4 text-left whitespace-nowrap">Status</TableHead>
-                <TableHead className="font-semibold text-gray-900 py-3 px-4 text-left whitespace-nowrap">Actions</TableHead>
+              <TableRow className="border-b border-gray-200">
+                <TableHead className="font-semibold text-gray-900 whitespace-nowrap">Campaign ID</TableHead>
+                <TableHead className="font-semibold text-gray-900 whitespace-nowrap">Name</TableHead>
+                <TableHead className="font-semibold text-gray-900 whitespace-nowrap">Launched</TableHead>
+                <TableHead className="font-semibold text-gray-900 text-right whitespace-nowrap">Target Suppliers</TableHead>
+                <TableHead className="font-semibold text-gray-900 text-right whitespace-nowrap">Contacted</TableHead>
+                <TableHead className="font-semibold text-gray-900 text-right whitespace-nowrap">Responded</TableHead>
+                <TableHead className="font-semibold text-gray-900 text-right whitespace-nowrap">Submitted</TableHead>
+                <TableHead className="font-semibold text-gray-900 whitespace-nowrap">Response Rate</TableHead>
+                <TableHead className="font-semibold text-gray-900 whitespace-nowrap">Deadline</TableHead>
+                <TableHead className="font-semibold text-gray-900 whitespace-nowrap">Status</TableHead>
+                <TableHead className="font-semibold text-gray-900 text-right whitespace-nowrap">Actions</TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody>
-              {data.map((row, index) => (
-                <TableRow key={index} className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
-                  <TableCell className="font-medium text-gray-900 py-3 px-4 text-left whitespace-nowrap">{row.campaignId}</TableCell>
-                  <TableCell className="text-gray-900 py-3 px-4 text-left whitespace-nowrap">{row.name}</TableCell>
-                  <TableCell className="text-gray-600 py-3 px-4 text-left whitespace-nowrap">{row.launched}</TableCell>
-                  <TableCell className="text-gray-900 py-3 px-4 text-right whitespace-nowrap">{row.targetSuppliers}</TableCell>
-                  <TableCell className="text-gray-900 py-3 px-4 text-right whitespace-nowrap">{row.contacted}</TableCell>
-                  <TableCell className="text-gray-900 py-3 px-4 text-right whitespace-nowrap">{row.responded}</TableCell>
-                  <TableCell className="text-gray-900 py-3 px-4 text-right font-bold whitespace-nowrap">{row.submitted}</TableCell>
-                  <TableCell className="py-3 px-4 text-left whitespace-nowrap">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm text-gray-900 font-medium">{row.responseRate}%</span>
-                      <div className="flex-1 max-w-[100px] h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-teal-600 rounded-full"
-                          style={{ width: `${row.responseRate}%` }}
-                        />
-                      </div>
+          <TableBody>
+            {campaigns.map((campaign) => (
+              <TableRow key={campaign.campaignId} className="border-b border-gray-200">
+                <TableCell className="text-gray-900 whitespace-nowrap">{campaign.campaignId}</TableCell>
+                <TableCell className="text-gray-900 whitespace-nowrap">{campaign.name}</TableCell>
+                <TableCell className="text-gray-900 whitespace-nowrap">{formatDate(campaign.launched)}</TableCell>
+                <TableCell className="text-gray-900 text-right whitespace-nowrap">{campaign.targetSuppliers}</TableCell>
+                <TableCell className="text-gray-900 text-right whitespace-nowrap">{campaign.contacted}</TableCell>
+                <TableCell className="text-gray-900 text-right whitespace-nowrap">{campaign.responded}</TableCell>
+                <TableCell className="text-gray-900 text-right font-bold whitespace-nowrap">{campaign.submitted}</TableCell>
+                <TableCell className="whitespace-nowrap">
+                  <div className="flex items-center gap-2 min-w-[120px]">
+                    <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden flex">
+                      <div 
+                        className="h-full rounded-full" 
+                        style={{ width: `${campaign.responseRate}%`, backgroundColor: '#0D9488' }}
+                      ></div>
+                      <div 
+                        className="h-full bg-green-500 rounded-full" 
+                        style={{ width: `${100 - campaign.responseRate}%` }}
+                      ></div>
                     </div>
-                  </TableCell>
-                  <TableCell className="text-gray-600 py-3 px-4 text-left whitespace-nowrap">{row.deadline}</TableCell>
-                  <TableCell className="py-3 px-4 text-left whitespace-nowrap">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                      {row.status}
-                    </span>
-                  </TableCell>
-                  <TableCell className="py-3 px-4 text-left whitespace-nowrap">
-                    <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:bg-gray-50">
-                      View
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+                    <span className="text-sm font-medium text-gray-900 whitespace-nowrap">{campaign.responseRate}%</span>
+                  </div>
+                </TableCell>
+                <TableCell className="text-gray-900 whitespace-nowrap">{formatDate(campaign.deadline)}</TableCell>
+                <TableCell className="whitespace-nowrap">
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                    campaign.status === 'Active' 
+                      ? 'bg-green-100 text-green-800' 
+                      : 'bg-green-100 text-green-800'
+                  }`}>
+                    {campaign.status}
+                  </span>
+                </TableCell>
+                <TableCell className="text-right whitespace-nowrap">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="border-gray-300 text-gray-700 hover:bg-gray-50"
+                  >
+                    View
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
         </div>
       </div>
     </div>
