@@ -94,6 +94,7 @@ const Sidebar: React.FC = () => {
     },
     {
       label: 'Energy Portfolio',
+      path: '/energy-portfolio',
       icon: (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M11.67 2.5L8.33 10H13.33L8.33 17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -102,6 +103,7 @@ const Sidebar: React.FC = () => {
     },
     {
       label: 'Environmental (Water/Waste)',
+      path: '/environmental-management',
       icon: (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M10 2.5C7.5 5.83 5.83 8.33 5.83 10C5.83 12.5 7.5 14.17 10 14.17C12.5 14.17 14.17 12.5 14.17 10C14.17 8.33 12.5 5.83 10 2.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -112,6 +114,7 @@ const Sidebar: React.FC = () => {
     },
     {
       label: 'Social & Governance',
+      path: '/social-governance',
       icon: (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M10 2.5L4.17 5.83V10C4.17 13.33 6.67 16.25 10 17.08C13.33 16.25 15.83 13.33 15.83 10V5.83L10 2.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
